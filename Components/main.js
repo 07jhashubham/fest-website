@@ -1,4 +1,3 @@
-"use clinet"
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -16,11 +15,13 @@ const Main = () => {
   camera.position.z = 1;
 
   const renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
 
+  // Note: Move the renderer.setSize inside the useEffect
   const containerRef = useRef();
 
   useEffect(() => {
+    // Move renderer.setSize inside the useEffect
+    renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
     new OrbitControls(camera, renderer.domElement);
@@ -34,7 +35,10 @@ const Main = () => {
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
-    window.addEventListener("resize", onWindowResize, false);
+    // Check if window is defined before adding the event listener
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", onWindowResize, false);
+    }
 
     function onWindowResize() {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -72,7 +76,7 @@ const Main = () => {
           href="upi://pay?pa=7shubhamjha-2@okaxis&amp;pn=Shubham%20Jha&amp;cu=INR"
           className="text-white hover:bg-lime-400 px-3 py-4 rounded-lg"
         >
-          Pay Now !
+          Pay Now!
         </a>
       </div>
     </div>

@@ -1,8 +1,8 @@
-"use client";
+"use client"
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const page = () => {
+const Page = () => {
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -14,12 +14,13 @@ const page = () => {
   camera.position.z = 1;
 
   const renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
+  // Note: Move the renderer.setSize inside the useEffect
 
   const containerRef = useRef();
 
   useEffect(() => {
+    // Move renderer.setSize inside the useEffect
+    renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry();
@@ -31,7 +32,10 @@ const page = () => {
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
-    window.addEventListener("resize", onWindowResize, false);
+    // Check if window is defined before adding the event listener
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", onWindowResize, false);
+    }
 
     function onWindowResize() {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -63,4 +67,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

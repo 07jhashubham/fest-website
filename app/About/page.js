@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const page = () => {
+const Page = () => {
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -14,13 +14,13 @@ const page = () => {
   camera.position.z = 1;
 
   const renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  // Note: Move the renderer.setSize inside the useEffect
 
-  // Use a React ref to reference the div element
   const containerRef = useRef();
 
   useEffect(() => {
-    // Append the renderer's dom element to the div using the ref
+    // Move renderer.setSize inside the useEffect
+    renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry();
@@ -32,7 +32,10 @@ const page = () => {
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
-    window.addEventListener("resize", onWindowResize, false);
+    // Check if window is defined before adding the event listener
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", onWindowResize, false);
+    }
 
     function onWindowResize() {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -60,8 +63,8 @@ const page = () => {
   return (
     <div className="h-screen">
       <div ref={containerRef} className="background"></div>
-      </div>
+    </div>
   );
 };
 
-export default page;
+export default Page;
