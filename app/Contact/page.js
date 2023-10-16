@@ -14,50 +14,48 @@ const Page = () => {
   camera.position.z = 1;
 
   const renderer = new THREE.WebGLRenderer();
-  // Note: Move the renderer.setSize inside the useEffect
 
   const containerRef = useRef();
 
   useEffect(() => {
-    // Move renderer.setSize inside the useEffect
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    containerRef.current.appendChild(renderer.domElement);
-
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({
-      color: 0xffd700,
-      wireframe: true,
-    });
-
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-
-    // Check if window is defined before adding the event listener
     if (typeof window !== "undefined") {
-      window.addEventListener("resize", onWindowResize, false);
-    }
-
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
+      // This code will only run on the client side.
       renderer.setSize(window.innerWidth, window.innerHeight);
-      render();
+      containerRef.current.appendChild(renderer.domElement);
+
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({
+        color: 0xffd700,
+        wireframe: true,
+      });
+
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      window.addEventListener("resize", onWindowResize, false);
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        render();
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        render();
+      }
+
+      function render() {
+        renderer.render(scene, camera);
+      }
+
+      animate();
     }
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-
-      render();
-    }
-
-    function render() {
-      renderer.render(scene, camera);
-    }
-
-    animate();
   }, []);
 
   return (
