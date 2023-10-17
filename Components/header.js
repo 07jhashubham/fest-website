@@ -28,13 +28,13 @@ const Header = () => {
     <>
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          {/* <Link href="/">
+          <Link href="/">
             <img
               src="https://i.ibb.co/m84SPDc/logo-transparent.png"
               alt="Logo"
               className="w-40 h-50 md:scale-150 "
             />
-          </Link> */}
+          </Link>
         </div>
         <div className=" space-x-16 text-[#c9c9d5] font-main text-3xl hidden md:flex">
           {/* <Link href="/" className="nav-desk">
@@ -63,7 +63,7 @@ const Header = () => {
         id="menu"
         class="absolute top-0 bottom-0 left-0 hidden flex-col z-30 self-end w-full min-h-screen py-1 pt-40 pl-12 space-y-3 text-lg text-white uppercase bg-black"
       >
-        {/* <Link href="/" className="text-white hover:text-pink-400">
+        <Link href="/" className="text-white hover:text-pink-400">
           Home
         </Link>
         <Link href="/About" className="text-white hover:text-pink-400">
@@ -71,7 +71,7 @@ const Header = () => {
         </Link>
         <Link href="/Contact" className="text-white hover:text-pink-400">
           Contact
-        </Link> */}
+        </Link>
       </div>
     </>
   );
