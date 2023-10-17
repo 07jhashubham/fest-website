@@ -61,7 +61,7 @@ const Page = () => {
 
   return (
     <div className="h-screen">
-      <div ref={containerRef} className="background"></div>
+      <div ref={containerRef} ></div>
     </div>
   );
 };

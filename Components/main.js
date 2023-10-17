@@ -65,7 +65,7 @@ const Main = () => {
 
   return (
     <div className="h-screen">
-      <div ref={containerRef} className="background"></div>
+      <div ref={containerRef} ></div>
       <div className="flex h-screen items-center justify-center">
         <h1 className="text-white text-center -translate-y-40 text-6xl">
           Ingenious: Where Creativity Meets Genius!
