@@ -37,7 +37,7 @@ const Header = () => {
           </Link>
         </div>
         <div className=" space-x-16 text-[#c9c9d5] font-main text-3xl hidden md:flex">
-          {/* <Link href="/" className="nav-desk">
+          <Link href="/" className="nav-desk">
             Home
           </Link>
           <Link href="/About" className="nav-desk">
@@ -45,7 +45,7 @@ const Header = () => {
           </Link>
           <Link href="/Contact" className="nav-desk">
             Contact
-          </Link> */}
+          </Link>
         </div>
         <div className="md:hidden">
           <button
