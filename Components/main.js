@@ -18,10 +18,12 @@ const Main = () => {
 
    const renderer = new THREE.WebGLRenderer();
 
-   const containerRef = useRef();
+   
 
    useEffect(() => {
      if (typeof window !== "undefined") {
+
+      const containerRef = useRef();
        // This code will only run on the client side.
        renderer.setSize(window.innerWidth, window.innerHeight);
        containerRef.current.appendChild(renderer.domElement);
